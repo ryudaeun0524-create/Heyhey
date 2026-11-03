@@ -120,7 +120,7 @@ async function initialize() {
   try { await tf.setBackend('webgl'); await tf.ready(); }
   catch { await tf.setBackend('cpu'); await tf.ready(); }
   const files = await vision.FilesetResolver.forVisionTasks(`${MP}/wasm`);
-  const options = {baseOptions:{modelAssetPath:MODEL,delegate:'GPU'},runningMode:'VIDEO',numHands:1,minHandDetectionConfidence:0.6,minHandPresenceConfidence:0.6,minTrackingConfidence:0.6};
+  const options = {baseOptions:{modelAssetPath:MODEL,delegate:'CPU'},runningMode:'VIDEO',numHands:1,minHandDetectionConfidence:0.6,minHandPresenceConfidence:0.6,minTrackingConfidence:0.6};
   try { detector = await vision.HandLandmarker.createFromOptions(files, options); }
   catch { options.baseOptions.delegate = 'CPU'; detector = await vision.HandLandmarker.createFromOptions(files, options); }
 }
